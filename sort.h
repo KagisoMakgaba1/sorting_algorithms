@@ -39,6 +39,7 @@ void counting_sort(int *array, size_t size);
 void *_calloc(unsigned int nmemb, unsigned int size);
 void merge_sort(int *array, size_t size);
 void _merge_sort(int *sub_array, int *temp_array, int left, int right);
-void _merge(int *sub_array, int *temp_array, int left, int midpoint, int right);
+void _merge(int *sub_array, int *temp_array, int left,
+		int midpoint, int right);
 
 #endif
