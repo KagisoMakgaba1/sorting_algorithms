@@ -36,10 +36,15 @@ void cocktail_sort_list(listint_t **list);
 bool left_bubble_sort(listint_t **list, listint_t **current);
 bool right_bubble_sort(listint_t **list, listint_t **current);
 void counting_sort(int *array, size_t size);
+
 void *_calloc(unsigned int nmemb, unsigned int size);
 void merge_sort(int *array, size_t size);
 void _merge_sort(int *sub_array, int *temp_array, int left, int right);
 void _merge(int *sub_array, int *temp_array, int left,
 		int midpoint, int right);
+
+void maxHeapify(int *array, size_t size, int idx, size_t n);
+void heap_sort(int *array, size_t size);
+void swap(int *a, int *b);
 
 #endif
