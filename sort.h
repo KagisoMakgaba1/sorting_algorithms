@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 /**
  * struct listint_s - Doubly linked list node
@@ -46,5 +47,9 @@ void _merge(int *sub_array, int *temp_array, int left,
 void maxHeapify(int *array, size_t size, int idx, size_t n);
 void heap_sort(int *array, size_t size);
 void swap(int *a, int *b);
+
+int getMax(int *array, size_t size);
+void countingSort(int *array, size_t size, int exp);
+void radix_sort(int *array, size_t size);
 
 #endif
