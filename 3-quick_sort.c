@@ -3,6 +3,7 @@
 void quick_sort(int *array, size_t size);
 void quicksort_recursive(int *array, int low, int high, size_t size);
 int lomuto_partition(int *array, int low, int high, size_t size);
+void swap(int *x, int *y);
 
 
 /**
@@ -81,4 +82,24 @@ int lomuto_partition(int *array, int low, int high, size_t size)
 		print_array(array, size);
 
 	return (i + 1);
+}
+
+
+/**
+ * swap - swaps two element in an array
+ * @x: the first value
+ * @y: the second value
+ */
+
+void swap(int *x, int *y)
+{
+	if (!x || !y)
+		return;
+
+	if (*x != *y)
+	{
+		*x ^= *y;
+		*y ^= *x;
+		*x ^= *y;
+	}
 }
