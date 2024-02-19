@@ -37,5 +37,7 @@ bool left_bubble_sort(listint_t **list, listint_t **current);
 bool right_bubble_sort(listint_t **list, listint_t **current);
 void counting_sort(int *array, size_t size);
 void *_calloc(unsigned int nmemb, unsigned int size);
+void merge(int *array, int *left, int *right, size_t size_left, size_t size_right);
+void merge_sort(int *array, size_t size);
 
 #endif
