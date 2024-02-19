@@ -52,4 +52,9 @@ int getMax(int *array, size_t size);
 void countingSort(int *array, size_t size, int exp);
 void radix_sort(int *array, size_t size);
 
+void swap(int arr[], int item1, int item2, int order);
+void merge(int arr[], int low, int nelemnt, int order);
+void bitonicsort(int arr[], int low, int nelemnt, int order, int size);
+void bitonic_sort(int *array, size_t size);
+
 #endif
