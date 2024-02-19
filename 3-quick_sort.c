@@ -33,15 +33,15 @@ void quick_sort(int *array, size_t size)
 
 void quicksort_recursive(int *array, int low, int high, size_t size)
 {
-	int pivot_index = lomuto_partition(array, low, high, size);
+	int pivot_index;
 
-	if (low < high)
-	{
-		print_array(array, size);
+	if (low < 0 || low >= high)
+		return;
 
-		quicksort_recursive(array, low, pivot_index - 1, size);
-		quicksort_recursive(array, pivot_index + 1, high, size);
-	}
+	pivot_index = lomuto_partition(array, size, low, high);
+
+	quicksort_recursive(array, low, pivot_index - 1, size);
+	quicksort_recursive(array, pivot_index + 1, high, size);
 }
 
 
