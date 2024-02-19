@@ -6,7 +6,7 @@ int lomuto_partition(int *array, int low, int high, size_t size);
 
 
 /**
- * Sorts an array of integers in ascending order using
+ * quick_sort - Sorts an array of integers in ascending order using
  * the Quick sort algorithm with Lomuto partition scheme.
  * @array: The array to be sorted.
  * @size: The size of the array.
