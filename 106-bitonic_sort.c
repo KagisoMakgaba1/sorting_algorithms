@@ -1,74 +1,99 @@
 #include "sort.h"
+#include <stdio.h>
+
+void _swap(int arr[], int item1, int item2, int order);
+void merge(int arr[], int low, int nelemnt, int order);
+void bitonicsort(int arr[], int low, int nelemnt, int order, int size);
+void bitonic_sort(int *array, size_t size);
 
 /**
- * bitonic_merge - Helper function to perform bitonic merge
- * @array: Array to be sorted
- * @low: Starting index of the subarray
- * @cnt: Size of the subarray
- * @dir: Sorting direction (UP or DOWN)
+ * _swap - change two values in ascending or descending order
+ * @arr: array
+ * @item1: item one
+ * @item2: item two
+ * @order: 1: ascending order, 0 descending order
  */
-void bitonic_merge(int *array, size_t low, size_t cnt, int dir)
+void _swap(int arr[], int item1, int item2, int order)
 {
-    if (cnt > 1)
-    {
-        size_t k = cnt / 2;
-        size_t i;
+	int temp;
 
-        printf("Merging [%lu/%lu] (%s):\n", cnt, cnt, (dir == 1) ? "UP" : "DOWN");
-        print_array(array + low, cnt);
-
-        for (i = low; i < low + k; ++i)
-        {
-            if ((array[i] > array[i + k]) == dir)
-            {
-                int temp = array[i];
-                array[i] = array[i + k];
-                array[i + k] = temp;
-
-                printf("Result [2/%lu] (%s):\n", cnt, (dir == 1) ? "UP" : "DOWN");
-                print_array(array + low, cnt);
-            }
-        }
-
-        bitonic_merge(array, low, k, dir);
-        bitonic_merge(array, low + k, k, dir);
-    }
+	if (order == (arr[item1] > arr[item2]))
+	{
+		temp = arr[item1];
+		arr[item1] = arr[item2];
+		arr[item2] = temp;
+	}
 }
-
 /**
- * bitonic_sort_recursive - Recursive function to perform Bitonic sort
- * @array: Array to be sorted
- * @low: Starting index of the subarray
- * @cnt: Size of the subarray
- * @dir: Sorting direction (UP or DOWN)
+ * merge - sort bitonic sequences recursively in both orders
+ * @arr: array
+ * @low: first element
+ * @nelemnt: elements number
+ * @order: 1: ascending order, 0 descending order
  */
-void bitonic_sort_recursive(int *array, size_t low, size_t cnt, int dir)
+void merge(int arr[], int low, int nelemnt, int order)
 {
-    if (cnt > 1)
-    {
-        size_t k = cnt / 2;
+	int mid, i;
 
-        bitonic_sort_recursive(array, low, k, 1);
-        bitonic_sort_recursive(array, low + k, k, 0);
-
-        bitonic_merge(array, low, cnt, dir);
-    }
+	if (nelemnt > 1)
+	{
+		mid = nelemnt / 2;
+		for (i = low; i < low + mid; i++)
+			_swap(arr, i, i + mid, order);
+		merge(arr, low, mid, order);
+		merge(arr, low + mid, mid, order);
+	}
 }
-
 /**
- * bitonic_sort - Sorts an array of integers in ascending order using Bitonic sort
- * @array: Array to be sorted
- * @size: Size of the array
+ * bitonicsort - bitonic sort algorithm implementation
+ * @arr: array
+ * @low: first element
+ * @nelemnt: number of elements
+ * @order: 1: ascending order, 0 descending order
+ * @size: array lenght
+ */
+void bitonicsort(int arr[], int low, int nelemnt, int order, int size)
+{
+	int mid;
+
+	if (nelemnt > 1)
+	{
+		if (order >= 1)
+		{
+			printf("Merging [%i/%i] (UP):\n", nelemnt, size);
+			print_array(&arr[low], nelemnt);
+		}
+		else
+		{
+			printf("Merging [%i/%i] (DOWN):\n", nelemnt, size);
+			print_array(&arr[low], nelemnt);
+		}
+		mid = nelemnt / 2;
+		bitonicsort(arr, low, mid, 1, size);
+		bitonicsort(arr, low + mid, mid, 0, size);
+		merge(arr, low, nelemnt, order);
+		if (order <= 0)
+		{
+			printf("Result [%i/%i] (DOWN):\n", nelemnt, size);
+			print_array(&arr[low], nelemnt);
+		}
+		if (order >= 1)
+		{
+			printf("Result [%i/%i] (UP):\n", nelemnt, size);
+			print_array(&arr[low], nelemnt);
+		}
+	}
+}
+/**
+ * bitonic_sort - prepare the terrain to bitonic sort algorithm
+ * @array: array
+ * @size: array lenght
  */
 void bitonic_sort(int *array, size_t size)
 {
-    int dir = 1;
+	int order = 1;
 
-    if (size > 1)
-    {
-        printf("Merging [%lu/%lu] (UP):\n", size, size);
-        print_array(array, size);
-
-        bitonic_sort_recursive(array, 0, size, dir);
-    }
+	if (!array || size < 2)
+		return;
+	bitonicsort(array, 0, size, order, size);
 }
