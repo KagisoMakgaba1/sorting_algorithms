@@ -48,12 +48,13 @@ void maxHeapify(int *array, size_t size, int idx, size_t n);
 void heap_sort(int *array, size_t size);
 void swap(int *a, int *b);
 
-int getMax(int *array, size_t size);
-void countingSort(int *array, size_t size, int exp);
+int get_max(int *array, int size);
+void radix_counting_sort(int *array, size_t size, int sig, int *buff);
 void radix_sort(int *array, size_t size);
 
-void bitonic_merge(int *array, size_t low, size_t cnt, int dir);
-void bitonic_sort_recursive(int *array, size_t low, size_t cnt, int dir);
+void _swap(int arr[], int item1, int item2, int order);
+void merge(int arr[], int low, int nelemnt, int order);
+void bitonicsort(int arr[], int low, int nelemnt, int order, int size);
 void bitonic_sort(int *array, size_t size);
 
 #endif
